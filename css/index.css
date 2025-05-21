@@ -5,9 +5,35 @@ body {
   min-height: 100vh;
 }
 
+/* Top right auth buttons */
+.top-right-auth {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+}
+
+.auth-btn {
+  background: #0096c7;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.auth-btn:hover {
+  background: #023e8a;
+}
+
 .sidebar {
   width: 200px;
-  background: #000;
+  background: #8B0000;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -95,4 +121,6 @@ body {
   .sidebar { width: 100px; }
   .nav-btn { width: 90px; font-size: 13px; padding: 8px 0; }
   .main-content { padding: 20px 5px; }
+  .top-right-auth { top: 10px; right: 10px; gap: 6px; }
+  .auth-btn { padding: 6px 10px; font-size: 13px; }
 }

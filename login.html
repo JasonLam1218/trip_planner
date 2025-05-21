@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Trip Planner</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="form-container">
+    <form action="/api/users.js" method="post">
+      <h2>Login to Trip Planner</h2>
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+      <button type="submit">Login</button>
+
+      <div class="form-footer">
+        <label>
+          <input type="checkbox" name="remember"> Remember me
+        </label>
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

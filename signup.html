@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - Trip Planner</title>
+  <link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+  <div class="form-container">
+    <form novalidate>
+      <h2>Create an Account</h2>
+
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Choose a username" required>
+      <div class="error-message" id="username-error"></div>
+
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" placeholder="Enter your email" required>
+      <div class="error-message" id="email-error"></div>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      <div class="error-message" id="password-error"></div>
+
+      <label for="repeat-password">Repeat Password</label>
+      <input type="password" id="repeat-password" name="repeat-password" placeholder="Repeat your password" required>
+      <div class="error-message" id="repeat-password-error"></div>
+
+      <button type="submit">Sign Up</button>
+
+      <div class="form-footer">
+        <label>
+          <input type="checkbox" name="remember"> Remember me
+        </label>
+        <p>
+          By creating an account you agree to our
+          <a href="#">Terms &amp; Privacy</a>.
+        </p>
+        <p>
+          Already have an account?
+          <a href="login.html">Login</a>
+        </p>
+      </div>
+    </form>
+  </div>
+
+  <!-- Popup container (inserted before </body>) -->
+  <div id="popup-overlay" style="display:none;">
+    <div id="popup-content">
+      <span id="popup-close">&times;</span>
+      <span id="popup-message"></span>
+    </div>
+  </div>
+
+  <script src="js/signup.js"></script>
+</body>
+</html>
