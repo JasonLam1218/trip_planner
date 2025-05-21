@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Itinerary - Trip Planner</title>
+  <link rel="stylesheet" href="css/itinerary.css">
+</head>
+<body>
+  <header>
+    <img src="images/logo.png" alt="Trip Planner Logo" width="50">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="itinerary.html">Itinerary</a>
+      <a href="comments.html">Comments</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Create Your Itinerary</h1>
+    <form id="itinerary-form">
+      <label>
+        Destination:
+        <input type="text" id="destination" required>
+      </label>
+      <label>
+        Date:
+        <input type="date" id="date" required>
+      </label>
+      <button type="submit">Add to Itinerary</button>
+    </form>
+    <ul id="itinerary-list"></ul>
+  </main>
+  <script src="js/itinerary.js"></script>
+</body>
+</html>

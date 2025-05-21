@@ -1,1 +1,3 @@
-# trip_planner
+# local host 
+python3 -m http.server 8000
+ 
