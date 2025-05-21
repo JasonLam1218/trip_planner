@@ -67,6 +67,8 @@ module.exports = async function (req, res) {
 
     res.status(201).json({ message: 'User registered successfully.' });
   } catch (err) {
+    // Log the error for debugging
+    // case 1: existing user
     console.error('[ERROR] Exception in /api/users.js:', err);
     res.status(500).json({ message: 'Server error. Please try again later.' });
   }

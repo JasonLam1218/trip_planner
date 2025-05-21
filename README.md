@@ -1,9 +1,20 @@
-# Running the Application 
-1. Clone this repo
-2. Navigate to the project directory
-2. ```bash python3 -m http.server 8000 ```
+# Running the Application
+    1. Clone this repo
+    2. Navigate to the project directory
+    (localhost)
+    ```python3 -m http.server 8001 ```
+    ```node server.js ```
 
 The application will be available at http://localhost:8001
+
+# Running the Application using Vercel
+    1. Register an Email or Sign Up
+    2. Connect to GitHub
+        ∙ Click the New Project button
+        ∙ Import GitHub Repository and choose the repository 
+    3. Deploy Your Application
+
+The applicaiton will be acailable at https://trip-planner-git-dev-jasonlam1218s-projects.vercel.app/
 
 # MySQL Data Verification Guide
 This guide helps you connect to a MySQL server, create a database and table (if needed), and verify that your backend has successfully stored data.
@@ -39,11 +50,3 @@ This guide helps you connect to a MySQL server, create a database and table (if 
 
 ## Check if Data Is Stored
     SELECT * FROM users;
-
-
-
-
-
-
-
-
