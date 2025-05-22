@@ -1,20 +1,134 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f0f8ff;
-  }
-  header {
-    background: #023e8a;
-    color: #fff;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-  }
-  nav a {
-    color: #fff;
-    margin: 0 10px;
-    text-decoration: none;
-  }
-  main {
-    padding: 20px;
-  }
-  
+  font-family: Arial, sans-serif;
+  background: #f0f8ff;
+  margin: 0;
+}
+
+.itinerary-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 320px;
+  background: #fff;
+  border-right: 1px solid #e0e0e0;
+  padding: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar header {
+  background: #023e8a;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.search-section {
+  padding: 16px 20px 8px 20px;
+}
+
+#place-search {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #bcdff1;
+  font-size: 15px;
+  background: #f6faff;
+}
+
+.places-list {
+  list-style: none;
+  padding: 0 20px;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.places-list li {
+  background: #f1f8fe;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 7px;
+  cursor: grab;
+  font-size: 15px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  border-left: 4px solid #0096c7;
+  transition: background 0.2s;
+}
+
+.places-list li.dragging {
+  opacity: 0.5;
+}
+
+.main-panel {
+  flex: 1;
+  padding: 32px 40px;
+  background: #f0f8ff;
+  min-width: 0;
+}
+
+.main-panel header {
+  margin-bottom: 20px;
+}
+
+.timetable {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 24px;
+  overflow-x: auto;
+}
+
+.timetable-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.timetable-table th, .timetable-table td {
+  border: 1px solid #bcdff1;
+  text-align: center;
+  min-width: 120px;
+  height: 60px;
+  position: relative;
+}
+
+.timetable-table th {
+  background: #0096c7;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 0;
+}
+
+.timetable-table td {
+  background: #f6faff;
+  vertical-align: top;
+  transition: background 0.2s;
+}
+
+.timetable-table td.droppable {
+  background: #caf0f8;
+}
+
+.timetable-event {
+  background: #48cae4;
+  color: #023e8a;
+  border-radius: 6px;
+  padding: 4px 8px;
+  margin: 2px 0;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  word-break: break-word;
+}
+
+.timetable-event .remove-btn {
+  margin-left: 6px;
+  color: #d90429;
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
