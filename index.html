@@ -6,28 +6,19 @@
   <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-  <!-- Top Panel: Add About buttons and Auth buttons -->
   <header class="header-bar">
-    <!-- (Optional) About buttons or other left-side content can go here -->
-    <div class="header-left">
-      <a href="about.html" class="about-btn">About</a>
-    </div>
-    <!-- ADD: Login and Signup buttons in top right -->
-    <div class="header-extra-right">
-      <a href="login.html" class="auth-btn">Login</a>
-      <a href="signup.html" class="auth-btn">Sign Up</a>
-    </div>
+    <a href="about.html" class="about-btn">About</a>
+    <a href="login.html" class="auth-btn">Login</a>
+    <a href="signup.html" class="auth-btn">Sign Up</a>
   </header>
-
   <main class="main-content">
-    <h1>Famous Places Around the World</h1>
     <div class="center-content">
       <div class="search-bar-container">
         <input
           type="text"
           id="location-search"
           placeholder="Search famous places..."
-          autocomplete="off"
+          autocomplete="on"
         />
         <div id="autocomplete-results" class="autocomplete-results"></div>
       </div>
