@@ -50,3 +50,7 @@ This guide helps you connect to a MySQL server, create a database and table (if 
 
 ## Check if Data Is Stored
     SELECT * FROM users;
+
+# Calling API 
+    - Geoapify (location)
+    https://myprojects.geoapify.com/api/EsZj7VDNbWbyThWSu8zW/keys
