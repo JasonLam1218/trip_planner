@@ -2,157 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Trip Planner Dashboard</title>
+  <title>Ultimate Travel Planner</title>
   <link rel="stylesheet" href="/css/main.css">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
   <div class="sidebar">
-    <div class="sidebar-header">
-      <img src="avatar.png" alt="Avatar" class="avatar">
-      <div>
-        <div class="sidebar-username"></div>
-        <div class="sidebar-role">Part-time Traveller</div>
-      </div>
-    </div>
-    <button class="new-trip-btn">+ New Trip</button>
+    <button class="new-trip-btn">
+      <i class="fa fa-plus"></i> New Trip
+    </button>
     <div class="sidebar-section">
-      <div class="sidebar-title">TRIPS</div>
-      <ul class="trip-list">
-        <li><span class="flag">🇲🇾</span> Kuala Lumpur<br><small>5 Days, 24 Dec 2024</small></li>
-        <li><span class="flag">🇯🇵</span> Tokyo<br><small>14 Days, 1 Jan 2025</small></li>
-        <li><span class="flag">🇹🇭</span> Bangkok<br><small>8 Days, 4 Mar 2025</small></li>
-        <li><span class="flag">🇻🇳</span> Hanoi<br><small>8 Days, 19 Jul 2025</small></li>
-      </ul>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-title">GENERAL</div>
+      <div class="sidebar-title">Navigation</div>
       <ul>
-        <li class="active">Dashboard</li>
-        <li>Itinerary <span class="badge new">NEW!</span></li>
+        <li><i class="fa fa-map-marked-alt"></i> Destinations</li>
+        <li><i class="fa fa-location-dot"></i> Places to Visit</li>
+        <li><i class="fa fa-list-check"></i> Travel Checklist</li>
+        <li><i class="fa fa-suitcase"></i> Packing List</li>
+        <li><i class="fa fa-book"></i> Bookings</li>
+        <li><i class="fa fa-wallet"></i> Expenses</li>
+        <li><i class="fa fa-route"></i> Travel Itinerary</li>
+        <li><i class="fa fa-book-open"></i> Travel Journal</li>
+        <li><i class="fa fa-star"></i> Bucket list</li>
+        <li><i class="fa fa-compass"></i> Guideline</li>
       </ul>
     </div>
     <div class="sidebar-section">
-      <div class="sidebar-title">DISCOVER</div>
+      <div class="sidebar-title">Travel Checklist</div>
       <ul>
-        <li>Explore</li>
-        <li>Guide</li>
-        <li>Friends</li>
+        <li><i class="fa fa-image"></i> Gallery</li>
       </ul>
     </div>
-    <button class="logout-btn">Logout</button>
   </div>
-  <div class="main-content">
+  <div class="main-content" id="main-content">
     <header>
-      <h1>Good Morning, <span class="username-placeholder"></span> <span class="wave">👋</span></h1>
-      <p>Plan your itinerary with us</p>
-      <div class="profile-images">
-        <img src="profile1.png" alt="">
-        <img src="profile2.png" alt="">
-        <img src="profile3.png" alt="">
-        <img src="profile4.png" alt="">
-        <img src="profile5.png" alt="">
-        <img src="profile6.png" alt="">
-      </div>
+      <h1>Ultimate Travel Planner</h1>
     </header>
-    <section class="upcoming-trip">
-      <h2>Upcoming Trip</h2>
-      <div class="trip-cards">
-        <div class="trip-card">
-          <img src="kl-ipoh.jpg" alt="Kuala Lumpur - Ipoh">
-          <div class="trip-info">
-            <div class="trip-title">Kuala Lumpur - Ipoh</div>
-            <div class="trip-country">Malaysia</div>
-            <div class="trip-meta">
-              <span class="trip-date">12 Dec</span>
-              <span class="trip-duration">4 Days</span>
-            </div>
-            <div class="trip-budget">Budget: <b>$1,200</b></div>
-            <button class="details-btn">Details</button>
-          </div>
-        </div>
-        <div class="trip-card">
-          <img src="sapa-ninhbinh.jpg" alt="Sapa - Ninh Binh">
-          <div class="trip-info">
-            <div class="trip-title">Sapa - Ninh Binh</div>
-            <div class="trip-country">Vietnam</div>
-            <div class="trip-meta">
-              <span class="trip-date">24 Nov</span>
-              <span class="trip-duration">12 Days</span>
-            </div>
-            <div class="trip-budget">Budget: <b>$890</b></div>
-            <button class="details-btn">Details</button>
-          </div>
-        </div>
+    <section class="section-block">
+      <div class="section-header">
+        <span><i class="fa fa-calendar-alt"></i> Upcoming Trips</span>
       </div>
+      <div class="section-subheader">
+        <i class="fa fa-table-list"></i> Planning
+      </div>
+      <div class="search-bar-container">
+        <input
+          type="text"
+          id="location-search"
+          placeholder="Search famous places..."
+          autocomplete="on"
+        />
+        <div id="autocomplete-results" class="autocomplete-results"></div>
+      </div>
+      <div class="places-grid"></div>
     </section>
-    <section class="friends-location">
-      <h2>Friends Location</h2>
-      <div class="friends-map">
-        <div class="friend-location" style="top: 30%; left: 70%;">
-          <img src="shelly.png" alt="Shelly A.">
-          <span>Shelly A.<br><small>Japan</small></span>
-        </div>
-        <div class="friend-location" style="top: 60%; left: 40%;">
-          <img src="edgar.png" alt="Edgar P.">
-          <span>Edgar P.<br><small>Argentina</small></span>
-        </div>
+    <section class="section-block">
+      <div class="section-header">
+        <span>Places I Plan to Visit</span>
       </div>
-      <button class="expand-btn">Expand</button>
-    </section>
-    <section class="recommendations">
-      <h2>For your <span class="highlight">Malaysia</span> Trip</h2>
-      <p>These can't be missed places</p>
-      <div class="recommend-list">
-        <div class="recommend-card">
-          <img src="central-market.jpg" alt="Central Market">
-          <div class="recommend-info">
-            <div class="recommend-title">Central Market - Kuala Lumpur</div>
-            <div class="recommend-desc">A vibrant cultural landmark offering local crafts, souvenirs, and more.</div>
-            <div class="recommend-meta">
-              <span class="star">★ 4.5 (47)</span>
-              <span class="guide">Guide by: Nita</span>
-            </div>
-            <div class="tags">
-              <span>Shopping</span>
-              <span>Souvenirs</span>
-              <span>Culture</span>
-            </div>
-          </div>
-        </div>
-        <div class="recommend-card">
-          <img src="merdeka-square.jpg" alt="Merdeka Square">
-          <div class="recommend-info">
-            <div class="recommend-title">Merdeka Square - Kuala Lumpur</div>
-            <div class="recommend-desc">An iconic historic site surrounded by colonial buildings and the famous flagpole.</div>
-            <div class="recommend-meta">
-              <span class="star">★ 4.6 (53)</span>
-              <span class="guide">Guide by: El Primo</span>
-            </div>
-            <div class="tags">
-              <span>History</span>
-              <span>Architecture</span>
-              <span>Photography</span>
-            </div>
-          </div>
-        </div>
+      <div class="section-subheader">
+        <i class="fa fa-table-list"></i> To Visit
       </div>
-    </section>
-    <section class="itinerary">
-      <div class="itinerary-card">
-        <img src="malacca.jpg" alt="Malacca">
-        <div class="itinerary-info">
-          <div class="itinerary-title">One Week Itinerary - Malacca</div>
-          <div class="itinerary-meta">
-            <span>Traveller: <b>Mortis A.</b></span>
-          </div>
-          <div class="itinerary-details">
-            <div>Budget: <b>$1,200</b></div>
-            <div>Person: <b>2</b></div>
-            <div>Durations: <b>7d, 6n</b></div>
-          </div>
-          <button class="details-btn">Details</button>
-        </div>
-      </div>
+      <!-- Optionally, you can add another grid for planned places here -->
     </section>
   </div>
   <script src="/js/main.js"></script>

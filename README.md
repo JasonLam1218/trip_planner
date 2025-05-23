@@ -54,3 +54,6 @@ This guide helps you connect to a MySQL server, create a database and table (if 
 # Calling API 
     - Geoapify (location)
     https://myprojects.geoapify.com/api/EsZj7VDNbWbyThWSu8zW/keys
+
+    - Pexels (image)
+    https://www.pexels.com/api/key/

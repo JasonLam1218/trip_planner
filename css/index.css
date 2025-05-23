@@ -21,15 +21,6 @@ body {
   gap: 12px;
 }
 
-.header-img {
-  height: 56px;
-  width: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-right: 18px;
-  display: block;
-}
-
 .about-btn {
   background: #a259ff;
   color: #fff;
@@ -69,10 +60,16 @@ body {
 
 .main-content {
   padding: 120px 30px 0 30px;
-  background: #18181a;
   min-width: 0;
   min-height: 100vh;
   box-sizing: border-box;
+  /* Default background image for main panel */
+  background-image: url('https://latitudesgallery.com/cdn/shop/products/Kauai_SaltPondSunset035A2619_LatitudesGallery_2020WEB.jpg?v=1624672935');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 0.5s ease-in-out;
 }
 
 .center-content {
