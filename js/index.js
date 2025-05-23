@@ -1,4 +1,5 @@
-const apiKey = '3093a86a55c04f38a88f76f5b7e3341d'; // Your Geoapify API key
+const apiKey = '3093a86a55c04f38a88f76f5b7e3341d'; // Geoapify API key
+const pexelsApiKey = '3ALWgUIgB3TKe9XKjiHc7PnviX2JLZFf5saoKL0HCDZMVJYOZWaSvRKi'; // Pexels API key
 const placeCategory = 'tourism.sights';
 const defaultRadius = 10000; // 10km
 
@@ -6,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const grid = document.querySelector('.places-grid');
   const searchInput = document.getElementById('location-search');
   const autocompleteResults = document.getElementById('autocomplete-results');
+  const mainContent = document.getElementById('main-content');
   let currentSuggestions = [];
   let debounceTimer = null;
 
@@ -23,16 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   async function fetchAutocompleteSuggestions(query) {
     const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(query)}&limit=5&apiKey=${apiKey}`;
-    console.log("Fetching autocomplete:", url);
     try {
       const response = await fetch(url);
-      console.log("Autocomplete response status:", response.status);
       if (!response.ok) {
         console.error("Autocomplete API error:", response.status, response.statusText);
         return;
       }
       const data = await response.json();
-      console.log("Autocomplete data:", data);
       currentSuggestions = data.features;
       renderAutocomplete(currentSuggestions);
     } catch (err) {
@@ -46,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
       autocompleteResults.style.display = 'none';
       return;
     }
-    suggestions.forEach((feature, idx) => {
+    suggestions.forEach((feature) => {
       const item = document.createElement('div');
       item.className = 'autocomplete-item';
       item.textContent = feature.properties.formatted;
@@ -71,83 +70,78 @@ document.addEventListener('DOMContentLoaded', function() {
   // ---- Fetch and display places after selecting a suggestion ----
   async function handleLocationSelect(feature) {
     const [lon, lat] = feature.geometry.coordinates;
-    grid.innerHTML = '<div style="color:#a259ff;font-size:1.2rem;">Loading...</div>';
+    const placeName = feature.properties.name || feature.properties.city || feature.properties.formatted;
+    grid.innerHTML = '<div class="loading">Loading places...</div>';
+    setMainBgImageFromPexels(placeName);
+
+    // Fetch places from Geoapify
+    const placesUrl = `https://api.geoapify.com/v2/places?categories=${placeCategory}&filter=circle:${lon},${lat},${defaultRadius}&limit=12&apiKey=${apiKey}`;
     try {
-      const places = await fetchFamousPlaces(lat, lon, defaultRadius, placeCategory);
-      await renderPlacesGrid(places);
-    } catch (err) {
-      console.error("Places fetch error:", err);
-      grid.innerHTML = `<div style="color:red;">${err.message}</div>`;
-    }
-  }
-
-  // ---- Place fetching and rendering ----
-  async function fetchFamousPlaces(lat, lon, radius, category) {
-    const url = `https://api.geoapify.com/v2/places?categories=${category}&filter=circle:${lon},${lat},${radius}&limit=18&apiKey=${apiKey}`;
-    console.log("Fetching places:", url);
-    const response = await fetch(url);
-    console.log("Places response status:", response.status);
-    if (!response.ok) {
-      console.error("Places API error:", response.status, response.statusText);
-      throw new Error('Failed to fetch places');
-    }
-    const data = await response.json();
-    console.log("Places data:", data);
-    return data.features;
-  }
-
-  async function getPlaceImage(properties) {
-    if (
-      properties.details &&
-      properties.details.wiki_and_media &&
-      properties.details.wiki_and_media.image
-    ) {
-      return properties.details.wiki_and_media.image;
-    }
-    if (properties.wikipedia) {
-      const image = await fetchWikipediaImage(properties.wikipedia);
-      if (image) return image;
-    }
-    return 'https://placehold.co/180x120?text=No+Image';
-  }
-
-  async function fetchWikipediaImage(wikipediaUrl) {
-    if (!wikipediaUrl) return null;
-    const title = wikipediaUrl.split('/').pop();
-    const apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
-    try {
-      const response = await fetch(apiUrl);
-      if (!response.ok) return null;
+      const response = await fetch(placesUrl);
+      if (!response.ok) {
+        grid.innerHTML = '<div class="error">Failed to load places.</div>';
+        return;
+      }
       const data = await response.json();
-      return data.thumbnail ? data.thumbnail.source : null;
-    } catch {
-      return null;
+      renderPlacesGrid(data.features);
+    } catch (err) {
+      grid.innerHTML = '<div class="error">Failed to load places.</div>';
     }
   }
 
-  async function renderPlaceCard(place) {
-    const name = place.properties.name || 'Unknown Place';
-    const address = place.properties.formatted || '';
-    const imageUrl = await getPlaceImage(place.properties);
-    const card = document.createElement('div');
-    card.className = 'place-card';
-    card.innerHTML = `
-      <img src="${imageUrl}" alt="Place image">
-      <h3>${name}</h3>
-      <p>${address}</p>
-    `;
-    grid.appendChild(card);
-  }
-
-  async function renderPlacesGrid(places) {
+  // Render all places in a grid
+  function renderPlacesGrid(places) {
     grid.innerHTML = '';
     if (places.length === 0) {
-      grid.innerHTML = '<div style="color:#ccc;">No places found in this area.</div>';
+      grid.innerHTML = '<div class="no-results">No places found.</div>';
       return;
     }
-    await Promise.all(places.map(renderPlaceCard));
+    places.forEach(place => {
+      const card = document.createElement('div');
+      card.className = 'place-card';
+
+      const name = place.properties.name || 'Unnamed Place';
+      const address = place.properties.formatted || '';
+      const imgSrc = place.properties.datasource && place.properties.datasource.raw && place.properties.datasource.raw.image
+        ? place.properties.datasource.raw.image
+        : 'https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200';
+
+      card.innerHTML = `
+        <img src="${imgSrc}" alt="${name}">
+        <h3>${name}</h3>
+        <p>${address}</p>
+      `;
+      grid.appendChild(card);
+    });
   }
 
-  // ---- On page load, show nothing ----
-  grid.innerHTML = '';
+  // ---- Fetch image from Pexels API and update only main panel background ----
+  async function setMainBgImageFromPexels(query) {
+    const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1`;
+    try {
+      const response = await fetch(url, {
+        headers: {
+          Authorization: pexelsApiKey
+        }
+      });
+      if (!response.ok) {
+        setDefaultMainBgImage();
+        return;
+      }
+      const data = await response.json();
+      const photo = data.photos && data.photos.length > 0 ? data.photos[0] : null;
+      if (photo && photo.src && photo.src.landscape) {
+        mainContent.style.backgroundImage = `url('${photo.src.landscape}')`;
+      } else {
+        setDefaultMainBgImage();
+      }
+    } catch (err) {
+      setDefaultMainBgImage();
+    }
+  }
+
+  function setDefaultMainBgImage() {
+    const defaultImg = "https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200";
+    mainContent.style.backgroundImage = `url('${defaultImg}')`;
+  }
 });

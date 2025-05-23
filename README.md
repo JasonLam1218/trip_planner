@@ -2,8 +2,8 @@
     1. Clone this repo
     2. Navigate to the project directory
     (localhost)
-    ```python3 -m http.server 8001 ```
-    ```node server.js ```
+    python3 -m http.server 8001
+    node server.js
 
 The application will be available at http://localhost:8001
 

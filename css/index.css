@@ -11,19 +11,23 @@ body {
   background: #18181a;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0 48px;
   height: 70px;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
+  gap: 12px;
 }
 
-.header-left {
-  display: flex;
-  gap: 16px;
-  align-items: center;
+.header-img {
+  height: 56px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 18px;
+  display: block;
 }
 
 .about-btn {
@@ -40,14 +44,9 @@ body {
   outline: none;
   display: inline-block;
 }
+
 .about-btn:hover {
   background: #7b2ff2;
-}
-
-.header-right {
-  display: flex;
-  gap: 12px;
-  align-items: center;
 }
 
 .auth-btn {
@@ -63,12 +62,13 @@ body {
   outline: none;
   display: inline-block;
 }
+
 .auth-btn:hover {
   background: #023e8a;
 }
 
 .main-content {
-  padding: 120px 30px 0 30px; /* add top padding for fixed header */
+  padding: 120px 30px 0 30px;
   background: #18181a;
   min-width: 0;
   min-height: 100vh;
@@ -189,64 +189,5 @@ body {
   .header-bar { flex-direction: column; height: auto; padding: 0 4px; }
   .main-content { padding: 80px 2px 0 2px; }
   .places-grid { gap: 8px; }
-  .header-left, .header-right { gap: 6px; }
   .about-btn, .auth-btn { padding: 6px 10px; font-size: 13px; }
-}
-
-/* Added: About buttons on the left of header */
-.header-extra-left {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-right: 18px;
-}
-.about-btn {
-  background: #a259ff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 18px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.15s;
-  outline: none;
-  display: inline-block;
-}
-.about-btn:hover {
-  background: #7b2ff2;
-}
-
-/* Added: Auth buttons on the right of header */
-.header-extra-right {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-left: 18px;
-}
-.auth-btn {
-  background: #0096c7;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 18px;
-  font-size: 15px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.2s;
-  outline: none;
-  display: inline-block;
-}
-.auth-btn:hover {
-  background: #023e8a;
-}
-
-/* Ensure header-bar lays out all children horizontally and wraps if needed */
-.header-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 12px;
 }
