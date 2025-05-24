@@ -1,4 +1,4 @@
-// api/users.js
+// api/login.js
 
 const bcrypt = require('bcryptjs');
 const pool = require('../lib/db');
@@ -10,7 +10,6 @@ module.exports = async function (req, res) {
     }
 
     try {
-        // Parse JSON body
         const { username, password } = req.body;
 
         if (!username || !password) {
@@ -18,7 +17,7 @@ module.exports = async function (req, res) {
             return;
         }
 
-        // Find user by username from the database
+        // Find user by username
         const [users] = await pool.query(
             'SELECT id, username, password FROM users WHERE username = ?',
             [username]
@@ -30,18 +29,15 @@ module.exports = async function (req, res) {
         }
 
         const user = users[0];
-
-        // Compare password with hash in database
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
             res.status(401).json({ message: 'Username or password is incorrect.' });
             return;
         }
 
-        // Success
         res.status(200).json({ message: 'Login successful.' });
     } catch (err) {
-        console.error('[ERROR] Exception in /api/users.js:', err);
+        console.error('[ERROR] Exception in /api/login.js:', err);
         res.status(500).json({ message: 'Server error. Please try again later.' });
     }
 };

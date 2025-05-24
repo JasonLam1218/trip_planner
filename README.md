@@ -54,6 +54,12 @@ This guide helps you connect to a MySQL server, create a database and table (if 
 ## Check if Data Is Stored
     SELECT * FROM users;
 
+## Delete existing user
+    DELETE FROM users WHERE id = 1
+    
+## Restart ID with 1 (only if the table is empty)
+    ALTER TABLE users AUTO_INCREMENT = 1;
+
 # Calling API 
     - Geoapify (location)
     https://myprojects.geoapify.com/api/EsZj7VDNbWbyThWSu8zW/keys
