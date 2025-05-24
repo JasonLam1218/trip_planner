@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login to Trip Planner</title>
-  <link rel="stylesheet" href="/css/login.css">
+    <meta charset="UTF-8">
+    <title>Login to Trip Planner</title>
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-  <div class="form-container">
-    <form id="loginForm">
-      <h2>Login to Trip Planner</h2>
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" required>
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
-      <button type="submit">Login</button>
-      <div class="form-footer">
-        <label>
-          <input type="checkbox" id="rememberMe"> Remember me
-        </label>
-        <div>
-          Don't have an account?
-          <a href="#">Sign Up</a>
-        </div>
-      </div>
-    </form>
-  </div>
-  <script src="/js/login.js"></script>
+    <div class="form-container">
+        <form id="loginForm" autocomplete="off">
+            <h2>Login to Trip Planner</h2>
+            <label for="username">Username</label>
+            <input type="text" id="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" required>
+            <button type="submit">Login</button>
+            <div class="form-footer">
+                <label>
+                    <input type="checkbox" id="rememberMe"> Remember me
+                </label>
+                <br>
+                <span>Don't have an account? <a href="signup.html">Sign Up</a></span>
+            </div>
+        </form>
+    </div>
+    <script src="/js/login.js"></script>
 </body>
 </html>
