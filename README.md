@@ -1,11 +1,14 @@
 # Running the Application
     1. Clone this repo
     2. Navigate to the project directory
-    (localhost)
-    python3 -m http.server 8001
-    node server.js
+    3. localhost
+        python3 -m http.server 8001
+        node server.js
 
 The application will be available at http://localhost:8001
+
+    Run the application via Vercel
+    https://trip-planner-git-dev-jasonlam1218s-projects.vercel.app/
 
 # Running the Application using Vercel
     1. Register an Email or Sign Up
