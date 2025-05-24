@@ -1,14 +1,14 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: #18181a;
+  background: #f7f8fa;
+  color: #263159;
   min-height: 100vh;
-  color: #fff;
 }
 
 .header-bar {
   width: 100%;
-  background: #18181a;
+  background: #263159;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -22,8 +22,8 @@ body {
 }
 
 .about-btn {
-  background: #a259ff;
-  color: #fff;
+  background: #f7b801;
+  color: #263159;
   border: none;
   border-radius: 8px;
   padding: 8px 22px;
@@ -37,12 +37,12 @@ body {
 }
 
 .about-btn:hover {
-  background: #7b2ff2;
+  background: #ffd700;
 }
 
 .auth-btn {
-  background: #0096c7;
-  color: #fff;
+  background: #fff;
+  color: #263159;
   border: none;
   border-radius: 8px;
   padding: 8px 18px;
@@ -55,7 +55,8 @@ body {
 }
 
 .auth-btn:hover {
-  background: #023e8a;
+  background: #f7b801;
+  color: #263159;
 }
 
 .main-content {
@@ -64,7 +65,7 @@ body {
   min-height: 100vh;
   box-sizing: border-box;
   /* Default background image for main panel */
-  background-image: url('https://latitudesgallery.com/cdn/shop/products/Kauai_SaltPondSunset035A2619_LatitudesGallery_2020WEB.jpg?v=1624672935');
+  background-image: url('/images/japan.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

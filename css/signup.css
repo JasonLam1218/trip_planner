@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f6faff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f7f8fa;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@ body {
 .form-container {
   background: #fff;
   padding: 32px 28px 22px 28px;
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.10);
   width: 100%;
   max-width: 400px;
@@ -19,7 +19,7 @@ body {
 
 form h2 {
   margin-bottom: 24px;
-  color: #0077b6;
+  color: #263159;
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
@@ -28,9 +28,9 @@ form h2 {
 label {
   display: block;
   margin-bottom: 7px;
-  color: #222;
+  color: #263159;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
   margin-left: 2px;
 }
 
@@ -39,18 +39,17 @@ input[type="password"] {
   width: 100%;
   padding: 16px;
   margin-bottom: 18px;
-  border: 1px solid #ddd;
+  border: 1px solid #bcdff1;
   border-radius: 8px;
   background: #f1f1f1;
   font-size: 16px;
   transition: border 0.2s, background 0.2s;
-  color: #222;
+  color: #263159;
   box-sizing: border-box;
 }
-
 input[type="text"]:focus,
 input[type="password"]:focus {
-  border: 1.5px solid #0096c7;
+  border: 1.5px solid #263159;
   outline: none;
   background: #fff;
 }
@@ -58,8 +57,8 @@ input[type="password"]:focus {
 button {
   width: 100%;
   padding: 16px;
-  background: #0096c7;
-  color: #fff;
+  background: #f7b801;
+  color: #263159;
   border: none;
   border-radius: 8px;
   font-size: 20px;
@@ -69,9 +68,8 @@ button {
   margin-bottom: 10px;
   box-sizing: border-box;
 }
-
 button:hover {
-  background: #023e8a;
+  background: #ffd700;
 }
 
 .form-footer {
@@ -79,32 +77,28 @@ button:hover {
   text-align: center;
   font-size: 15px;
 }
-
 .form-footer label {
   font-weight: normal;
   font-size: 15px;
-  color: #222;
+  color: #263159;
   margin-left: 0;
   margin-bottom: 0;
   display: inline-block;
 }
-
 .form-footer input[type="checkbox"] {
   margin-right: 6px;
 }
-
 .form-footer a {
-  color: #0096c7;
+  color: #f7b801;
   text-decoration: none;
   font-weight: 500;
 }
-
 .form-footer a:hover {
   text-decoration: underline;
 }
 
 .error-message {
-  color: red;
+  color: #d90429;
   font-size: 13px;
   margin-top: 2px;
   display: none;
@@ -119,7 +113,6 @@ button:hover {
   justify-content: center;
   z-index: 9999;
 }
-
 #popup-content {
   background: #fff;
   padding: 24px 32px;
@@ -130,7 +123,6 @@ button:hover {
   min-width: 250px;
   max-width: 90vw;
 }
-
 #popup-close {
   position: absolute;
   top: 10px; right: 16px;
@@ -138,7 +130,6 @@ button:hover {
   cursor: pointer;
   color: #888;
 }
-
 #popup-message {
   font-size: 16px;
   color: #e63946;

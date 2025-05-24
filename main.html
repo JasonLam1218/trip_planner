@@ -2,69 +2,164 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ultimate Travel Planner</title>
+  <title>Travellers Spot</title>
   <link rel="stylesheet" href="/css/main.css">
-  <!-- FontAwesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
   <div class="sidebar">
-    <button class="new-trip-btn">
-      <i class="fa fa-plus"></i> New Trip
-    </button>
-    <div class="sidebar-section">
-      <div class="sidebar-title">Navigation</div>
-      <ul>
-        <li><i class="fa fa-map-marked-alt"></i> Destinations</li>
-        <li><i class="fa fa-location-dot"></i> Places to Visit</li>
-        <li><i class="fa fa-list-check"></i> Travel Checklist</li>
-        <li><i class="fa fa-suitcase"></i> Packing List</li>
-        <li><i class="fa fa-book"></i> Bookings</li>
-        <li><i class="fa fa-wallet"></i> Expenses</li>
-        <li><i class="fa fa-route"></i> Travel Itinerary</li>
-        <li><i class="fa fa-book-open"></i> Travel Journal</li>
-        <li><i class="fa fa-star"></i> Bucket list</li>
-        <li><i class="fa fa-compass"></i> Guideline</li>
-      </ul>
+    <div class="sidebar-header">
+      <div class="sidebar-logo">Travellers Spot</div>
     </div>
-    <div class="sidebar-section">
-      <div class="sidebar-title">Travel Checklist</div>
-      <ul>
-        <li><i class="fa fa-image"></i> Gallery</li>
-      </ul>
-    </div>
+    <button class="new-trip-btn">+ New Trip</button>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Popular</div>
+        <ul>
+          <li>Near Me</li>
+          <li>Special Offers</li>
+        </ul>
+      </div>
+    </nav>
   </div>
   <div class="main-content" id="main-content">
-    <header>
-      <h1>Ultimate Travel Planner</h1>
+    <header class="main-header">
+      <input type="text" class="search-bar" id="location-search" placeholder="Search for places...">
+      <div class="main-user">
+        <img class="main-user-avatar" src="avatar2.png" alt="User Avatar">
+        <span class="main-user-name" id="main-username"></span>
+        <button class="logout-btn" id="logout-btn">Logout</button>
+      </div>
     </header>
-    <section class="section-block">
+
+    <!-- Popular Section (remains as a single block) -->
+    <div class="section-block">
       <div class="section-header">
-        <span><i class="fa fa-calendar-alt"></i> Upcoming Trips</span>
+        <span>Popular</span>
+        <a href="#" class="view-all">View All</a>
       </div>
-      <div class="section-subheader">
-        <i class="fa fa-table-list"></i> Planning
+      <div class="places-grid">
+        <div class="place-card">
+          <img src="bali.jpg" alt="Bali">
+          <h3>Bali <span class="place-country">Indonesia</span></h3>
+          <div class="place-meta">
+            <span class="place-rating">4.8</span>
+          </div>
+        </div>
+        <div class="place-card">
+          <img src="maldives.jpg" alt="Maldives">
+          <h3>Maldives <span class="place-country">Maldives</span></h3>
+          <div class="place-meta">
+            <span class="place-rating">5.0</span>
+          </div>
+        </div>
+        <div class="place-card">
+          <img src="santorini.jpg" alt="Santorini">
+          <h3>Santorini <span class="place-country">Greece</span></h3>
+          <div class="place-meta">
+            <span class="place-rating">4.9</span>
+          </div>
+        </div>
+        <div class="place-card">
+          <img src="capadocia.jpg" alt="Capadocia">
+          <h3>Capadocia <span class="place-country">Turkey</span></h3>
+          <div class="place-meta">
+            <span class="place-rating">4.7</span>
+          </div>
+        </div>
       </div>
-      <div class="search-bar-container">
-        <input
-          type="text"
-          id="location-search"
-          placeholder="Search famous places..."
-          autocomplete="on"
-        />
-        <div id="autocomplete-results" class="autocomplete-results"></div>
+    </div>
+
+    <!-- 2x2 Grid Section for the four blocks -->
+    <div class="section-block grid-2x2">
+      <!-- Must Go Place -->
+      <div class="grid-cell">
+        <div class="section-header">
+          <span>Must Go Place</span>
+        </div>
+        <div class="mustgo-list">
+          <div class="mustgo-card">
+            <img src="kintamani.jpg" alt="Kintamani">
+            <div class="mustgo-info">
+              <div class="mustgo-title">Kintamani</div>
+              <div>
+                <span class="mustgo-price">IDR 145.000</span>
+                <span class="mustgo-oldprice">IDR 250.000</span>
+              </div>
+              <div>
+                <span class="mustgo-rating">4.8</span>
+                <span class="mustgo-count">(122)</span>
+              </div>
+            </div>
+          </div>
+          <!-- Add more mustgo-card as needed -->
+        </div>
       </div>
-      <div class="places-grid"></div>
-    </section>
-    <section class="section-block">
-      <div class="section-header">
-        <span>Places I Plan to Visit</span>
+      <!-- Event Date Available -->
+      <div class="grid-cell">
+        <div class="section-header">
+          <span>Event Date Available</span>
+          <span>December 2023</span>
+        </div>
+        <div class="calendar">
+          <div class="calendar-grid">
+            <div class="calendar-day">Mo</div>
+            <div class="calendar-day">Tu</div>
+            <div class="calendar-day">We</div>
+            <div class="calendar-day">Th</div>
+            <div class="calendar-day">Fr</div>
+            <div class="calendar-day">Sa</div>
+            <div class="calendar-day">Su</div>
+            <div class="calendar-day">27</div>
+            <div class="calendar-day">28</div>
+            <div class="calendar-day">29</div>
+            <div class="calendar-day">30</div>
+            <div class="calendar-day">1</div>
+            <div class="calendar-day">2</div>
+            <div class="calendar-day">3</div>
+            <!-- etc -->
+          </div>
+        </div>
       </div>
-      <div class="section-subheader">
-        <i class="fa fa-table-list"></i> To Visit
+      <!-- My Schedule -->
+      <div class="grid-cell">
+        <div class="section-header">
+          <span>My Schedule</span>
+          <a href="#" class="view-all">View All</a>
+        </div>
+        <div class="schedule-list">
+          <div class="schedule-card">
+            <img src="louvre.jpg" alt="Louvre Museum">
+            <div>
+              <div class="schedule-title">Louvre Museum</div>
+              <div class="schedule-country">France</div>
+              <div class="schedule-date">24 Dec 2023</div>
+            </div>
+          </div>
+          <!-- Add more schedule-card as needed -->
+        </div>
       </div>
-      <!-- Optionally, you can add another grid for planned places here -->
-    </section>
+      <!-- Upcoming Trip -->
+      <div class="grid-cell">
+        <div class="section-header">
+          <span>Upcoming Trip</span>
+          <a href="#" class="view-all">View All</a>
+        </div>
+        <div class="schedule-list">
+          <div class="schedule-card">
+            <img src="disneyland.jpg" alt="Disneyland">
+            <div>
+              <div class="schedule-title">Disneyland</div>
+              <div class="schedule-country">Japan</div>
+              <div class="schedule-date">23 Dec 2023</div>
+            </div>
+          </div>
+          <!-- Add more schedule-card as needed -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Autocomplete results container -->
+    <div id="autocomplete-results" class="autocomplete-results"></div>
   </div>
   <script src="/js/main.js"></script>
 </body>
