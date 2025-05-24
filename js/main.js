@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Show username in sidebar and header
   const sidebarUsername = document.getElementById('sidebar-username');
   if (sidebarUsername) sidebarUsername.textContent = username;
-
   const mainUsername = document.getElementById('main-username');
   if (mainUsername) mainUsername.textContent = username;
 
@@ -28,6 +27,24 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('.new-trip-btn').addEventListener('click', function() {
     window.location.href = 'itinerary.html';
   });
+
+  // --- Checklist Modal Logic ---
+  const checklistBtn = document.getElementById('checklist-btn');
+  const checklistModal = document.getElementById('checklist-modal');
+  const closeChecklist = document.getElementById('close-checklist');
+  if (checklistBtn && checklistModal && closeChecklist) {
+    checklistBtn.addEventListener('click', function() {
+      checklistModal.style.display = 'block';
+    });
+    closeChecklist.addEventListener('click', function() {
+      checklistModal.style.display = 'none';
+    });
+    window.addEventListener('click', function(event) {
+      if (event.target === checklistModal) {
+        checklistModal.style.display = 'none';
+      }
+    });
+  }
 
   // --- Existing trip planner logic ---
   const apiKey = '3093a86a55c04f38a88f76f5b7e3341d';

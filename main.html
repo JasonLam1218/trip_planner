@@ -17,21 +17,23 @@
         <ul>
           <li>Near Me</li>
           <li>Special Offers</li>
+          <button id="checklist-btn" class="checklist-btn">Check List</button>
         </ul>
       </div>
     </nav>
   </div>
   <div class="main-content" id="main-content">
     <header class="main-header">
-      <input type="text" class="search-bar" id="location-search" placeholder="Search for places...">
+      <div id="location-search-container">
+        <input type="text" class="search-bar" id="location-search" placeholder="Search for places...">
+        <div id="autocomplete-results" class="autocomplete-results"></div>
+      </div>
       <div class="main-user">
         <img class="main-user-avatar" src="avatar2.png" alt="User Avatar">
         <span class="main-user-name" id="main-username"></span>
         <button class="logout-btn" id="logout-btn">Logout</button>
       </div>
     </header>
-
-    <!-- Popular Section (remains as a single block) -->
     <div class="section-block">
       <div class="section-header">
         <span>Popular</span>
@@ -68,10 +70,7 @@
         </div>
       </div>
     </div>
-
-    <!-- 2x2 Grid Section for the four blocks -->
     <div class="section-block grid-2x2">
-      <!-- Must Go Place -->
       <div class="grid-cell">
         <div class="section-header">
           <span>Must Go Place</span>
@@ -91,10 +90,8 @@
               </div>
             </div>
           </div>
-          <!-- Add more mustgo-card as needed -->
         </div>
       </div>
-      <!-- Event Date Available -->
       <div class="grid-cell">
         <div class="section-header">
           <span>Event Date Available</span>
@@ -116,11 +113,9 @@
             <div class="calendar-day">1</div>
             <div class="calendar-day">2</div>
             <div class="calendar-day">3</div>
-            <!-- etc -->
           </div>
         </div>
       </div>
-      <!-- My Schedule -->
       <div class="grid-cell">
         <div class="section-header">
           <span>My Schedule</span>
@@ -135,10 +130,8 @@
               <div class="schedule-date">24 Dec 2023</div>
             </div>
           </div>
-          <!-- Add more schedule-card as needed -->
         </div>
       </div>
-      <!-- Upcoming Trip -->
       <div class="grid-cell">
         <div class="section-header">
           <span>Upcoming Trip</span>
@@ -153,13 +146,23 @@
               <div class="schedule-date">23 Dec 2023</div>
             </div>
           </div>
-          <!-- Add more schedule-card as needed -->
         </div>
       </div>
     </div>
-
-    <!-- Autocomplete results container -->
-    <div id="autocomplete-results" class="autocomplete-results"></div>
+  </div>
+  <!-- Checklist Modal -->
+  <div id="checklist-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="close-checklist">&times;</span>
+      <h2>Travel Checklist</h2>
+      <form id="checklist-form">
+        <label><input type="checkbox" name="item" value="passport"> Passport</label>
+        <label><input type="checkbox" name="item" value="tickets"> Tickets</label>
+        <label><input type="checkbox" name="item" value="clothes"> Clothes</label>
+        <label><input type="checkbox" name="item" value="toiletries"> Toiletries</label>
+        <label><input type="checkbox" name="item" value="money"> Money / Cards</label>
+      </form>
+    </div>
   </div>
   <script src="/js/main.js"></script>
 </body>
