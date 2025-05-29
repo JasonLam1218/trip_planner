@@ -483,3 +483,108 @@ body {
     padding: 0.2rem;
   }
 }
+
+.checklist-btn {
+    background: #f7b801;
+    color: #263159;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: background 0.2s;
+    display: block;
+    width: 100%;
+}
+.checklist-btn:hover {
+    background: #ffd700;
+}
+/* Modal styles (simplified) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0; width: 100%; height: 100%;
+  overflow: auto; background: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background: #fff;
+  margin: 5% auto;
+  padding: 24px 32px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+.close {
+  position: absolute;
+  right: 16px; top: 16px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* Checklist styling */
+#checklist-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+.checklist-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+.checklist-row:last-child {
+  border-bottom: none;
+}
+.checklist-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: #2196F3;
+}
+.checklist-label {
+  flex: 1;
+  font-size: 16px;
+  word-break: break-all;
+}
+.delete-checklist-item {
+  background: #ff4d4f;
+  border: none;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.delete-checklist-item:hover {
+  background: #d9363e;
+}
+.checklist-input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+#new-checklist-item {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+#add-checklist-item {
+  padding: 6px 14px;
+  background: #2196F3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+#add-checklist-item:hover {
+  background: #1769aa;
+}

@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  // Show username in sidebar and header
-  const sidebarUsername = document.getElementById('sidebar-username');
-  if (sidebarUsername) sidebarUsername.textContent = username;
+  // Show username in header
   const mainUsername = document.getElementById('main-username');
   if (mainUsername) mainUsername.textContent = username;
 
@@ -119,3 +117,116 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 });
+
+// Editable Checklist Feature with Default Items Always Shown on Modal Open
+
+// Default checklist items
+const DEFAULT_CHECKLIST = [
+  "Passport",
+  "Medications",
+  "Travel Insurance",
+  "Tickets/Itinerary",
+  "Electronics",
+  "Chargers",
+  "Clothes",
+  "Money/Cards"
+];
+
+// Load checklist from localStorage or use default
+function getChecklist() {
+  const stored = localStorage.getItem('checklistItems');
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) return parsed;
+    } catch (e) {}
+  }
+  // If nothing stored, return a copy of the default
+  return [...DEFAULT_CHECKLIST];
+}
+
+// Save checklist to localStorage
+function saveChecklist(list) {
+  localStorage.setItem('checklistItems', JSON.stringify(list));
+}
+
+// Render checklist items in the popup
+function renderChecklist() {
+  const checklist = getChecklist();
+  const list = document.getElementById('checklist-items');
+  list.innerHTML = '';
+  checklist.forEach((item, idx) => {
+    const li = document.createElement('li');
+    li.className = 'checklist-row';
+
+    // Checkbox
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.className = 'checklist-checkbox';
+    checkbox.id = `check-${idx}`;
+
+    // Label
+    const label = document.createElement('label');
+    label.className = 'checklist-label';
+    label.htmlFor = `check-${idx}`;
+    label.textContent = item;
+
+    // Delete button
+    const delBtn = document.createElement('button');
+    delBtn.textContent = 'Delete';
+    delBtn.type = 'button';
+    delBtn.className = 'delete-checklist-item';
+    delBtn.onclick = () => {
+      // Remove item, save, and re-render
+      const current = getChecklist();
+      current.splice(idx, 1);
+      saveChecklist(current);
+      renderChecklist();
+    };
+
+    li.appendChild(checkbox);
+    li.appendChild(label);
+    li.appendChild(delBtn);
+    list.appendChild(li);
+  });
+}
+
+// Add new item to checklist
+document.getElementById('add-checklist-item').onclick = function() {
+  const input = document.getElementById('new-checklist-item');
+  const value = input.value.trim();
+  if (value) {
+    const current = getChecklist();
+    current.push(value);
+    saveChecklist(current);
+    input.value = '';
+    renderChecklist();
+  }
+};
+
+// Allow Enter key to add item
+document.getElementById('new-checklist-item').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    document.getElementById('add-checklist-item').click();
+    e.preventDefault();
+  }
+});
+
+// Show checklist modal and render items
+document.getElementById('sidebar-checklist-btn').onclick = function() {
+  document.getElementById('checklist-modal').style.display = 'block';
+  renderChecklist();
+};
+
+// Hide checklist modal
+document.getElementById('close-checklist').onclick = function() {
+  document.getElementById('checklist-modal').style.display = 'none';
+};
+
+// Hide modal if user clicks outside it
+window.onclick = function(event) {
+  const modal = document.getElementById('checklist-modal');
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+};

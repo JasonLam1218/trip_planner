@@ -15,8 +15,8 @@
       <div class="sidebar-section">
         <div class="sidebar-title">Popular</div>
         <ul>
-          <li>Weather</li>
-          <li>Money Conversion</li>
+          <button id="weather-btn" class="checklist-btn">Weather</button>
+          <button id="money-btn" class="checklist-btn">Money Conversion</button>
           <button id="checklist-btn" class="checklist-btn">Check List</button>
         </ul>
       </div>
@@ -151,16 +151,17 @@
     </div>
   </div>
   <!-- Checklist Modal -->
+  <!-- Checklist Modal -->
   <div id="checklist-modal" class="modal">
     <div class="modal-content">
       <span class="close" id="close-checklist">&times;</span>
       <h2>Travel Checklist</h2>
-      <form id="checklist-form">
-        <label><input type="checkbox" name="item" value="passport"> Passport</label>
-        <label><input type="checkbox" name="item" value="tickets"> Tickets</label>
-        <label><input type="checkbox" name="item" value="clothes"> Clothes</label>
-        <label><input type="checkbox" name="item" value="toiletries"> Toiletries</label>
-        <label><input type="checkbox" name="item" value="money"> Money / Cards</label>
+      <form id="checklist-form" autocomplete="off" onsubmit="return false;">
+        <ul id="checklist-items"></ul>
+        <div class="checklist-input-row">
+          <input type="text" id="new-checklist-item" placeholder="Add new item..." />
+          <button type="button" id="add-checklist-item">Add</button>
+        </div>
       </form>
     </div>
   </div>
