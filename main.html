@@ -70,82 +70,29 @@
       </div>
     </div>
     <div class="section-block grid-2x2">
-      <div class="grid-cell">
-        <div class="section-header">
-          <span>Must Go Place</span>
-        </div>
-        <div class="mustgo-list">
-          <div class="mustgo-card">
-            <img src="kintamani.jpg" alt="Kintamani">
-            <div class="mustgo-info">
-              <div class="mustgo-title">Kintamani</div>
-              <div>
-                <span class="mustgo-price">IDR 145.000</span>
-                <span class="mustgo-oldprice">IDR 250.000</span>
-              </div>
-              <div>
-                <span class="mustgo-rating">4.8</span>
-                <span class="mustgo-count">(122)</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="grid-cell" id="weather-cell">
+        <h3>Weather</h3>
+        <div id="weather-info">Loading...</div>
       </div>
-      <div class="grid-cell">
-        <div class="section-header">
-          <span>Event Date Available</span>
-          <span>December 2023</span>
-        </div>
-        <div class="calendar">
-          <div class="calendar-grid">
-            <div class="calendar-day">Mo</div>
-            <div class="calendar-day">Tu</div>
-            <div class="calendar-day">We</div>
-            <div class="calendar-day">Th</div>
-            <div class="calendar-day">Fr</div>
-            <div class="calendar-day">Sa</div>
-            <div class="calendar-day">Su</div>
-            <div class="calendar-day">27</div>
-            <div class="calendar-day">28</div>
-            <div class="calendar-day">29</div>
-            <div class="calendar-day">30</div>
-            <div class="calendar-day">1</div>
-            <div class="calendar-day">2</div>
-            <div class="calendar-day">3</div>
-          </div>
-        </div>
+      <div class="grid-cell" id="money-cell">
+        <h3>Money Conversion</h3>
+        <div id="money-info">Loading...</div>
       </div>
-      <div class="grid-cell">
-        <div class="section-header">
-          <span>My Schedule</span>
-          <a href="#" class="view-all">View All</a>
-        </div>
-        <div class="schedule-list">
-          <div class="schedule-card">
-            <img src="louvre.jpg" alt="Louvre Museum">
-            <div>
-              <div class="schedule-title">Louvre Museum</div>
-              <div class="schedule-country">France</div>
-              <div class="schedule-date">24 Dec 2023</div>
-            </div>
-          </div>
-        </div>
+      <div class="grid-cell" id="translator-cell">
+        <h3>Language Translator</h3>
+        <input type="text" id="translator-input" placeholder="Type text..." />
+        <select id="translator-lang">
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <!-- Add more languages as needed -->
+        </select>
+        <button id="translator-btn">Translate</button>
+        <div id="translator-result"></div>
       </div>
-      <div class="grid-cell">
-        <div class="section-header">
-          <span>Upcoming Trip</span>
-          <a href="#" class="view-all">View All</a>
-        </div>
-        <div class="schedule-list">
-          <div class="schedule-card">
-            <img src="disneyland.jpg" alt="Disneyland">
-            <div>
-              <div class="schedule-title">Disneyland</div>
-              <div class="schedule-country">Japan</div>
-              <div class="schedule-date">23 Dec 2023</div>
-            </div>
-          </div>
-        </div>
+      <div class="grid-cell" id="docs-cell">
+        <h3>Travel Documents</h3>
+        <input type="file" id="doc-upload" multiple />
+        <ul id="doc-list"></ul>
       </div>
     </div>
   </div>
