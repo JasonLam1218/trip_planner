@@ -1,115 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Travellers Spot</title>
-  <link rel="stylesheet" href="/css/main.css">
+    <meta charset="UTF-8">
+    <title>Travellers Spot</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-  <div class="sidebar">
-    <div class="sidebar-header">
-      <div class="sidebar-logo">Travellers Spot</div>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">Travellers Spot</div>
+            <button class="new-trip-btn">+ New Trip</button>
+        </div>
+        <div class="sidebar-nav">
+            <!-- Checklist directly in sidebar -->
+            <div class="sidebar-section" id="sidebar-checklist-section">
+                <div class="sidebar-title">Travel Checklist</div>
+                <ul id="checklist-items"></ul>
+                <div class="checklist-input-row">
+                    <input type="text" id="new-checklist-item" placeholder="Add new item...">
+                    <button id="add-checklist-item">Add</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <button class="new-trip-btn">+ New Trip</button>
-    <nav class="sidebar-nav">
-      <div class="sidebar-section">
-        <div class="sidebar-title">Popular</div>
-        <ul>
-          <button id="weather-btn" class="checklist-btn">Weather</button>
-          <button id="money-btn" class="checklist-btn">Money Conversion</button>
-          <button id="checklist-btn" class="checklist-btn">Check List</button>
-        </ul>
-      </div>
-    </nav>
-  </div>
-  <div class="main-content" id="main-content">
-    <header class="main-header">
-      <div id="location-search-container">
-        <input type="text" class="search-bar" id="location-search" placeholder="Search for places...">
-        <div id="autocomplete-results" class="autocomplete-results"></div>
-      </div>
-      <div class="main-user">
-        <img class="main-user-avatar" src="avatar2.png" alt="User Avatar">
-        <span class="main-user-name" id="main-username"></span>
-        <button class="logout-btn" id="logout-btn">Logout</button>
-      </div>
-    </header>
-    <div class="section-block">
-      <div class="section-header">
-        <span>Popular</span>
-      </div>
-      <div class="places-grid">
-        <div class="place-card">
-          <img src="bali.jpg" alt="Bali">
-          <h3>Bali <span class="place-country">Indonesia</span></h3>
-          <div class="place-meta">
-            <span class="place-rating">4.8</span>
-          </div>
+    <div class="main-content">
+        <div class="main-header">
+            <div id="location-search-container">
+                <input id="location-search" class="search-bar" type="text" placeholder="Search for a location...">
+                <div id="autocomplete-results" class="autocomplete-results"></div>
+            </div>
+            <div class="main-user">
+                <img src="avatar.png" alt="avatar" class="main-user-avatar">
+                <span class="main-user-name" id="main-username"></span>
+                <a href="#" id="logout-btn" class="logout-btn">Logout</a>
+            </div>
         </div>
-        <div class="place-card">
-          <img src="maldives.jpg" alt="Maldives">
-          <h3>Maldives <span class="place-country">Maldives</span></h3>
-          <div class="place-meta">
-            <span class="place-rating">5.0</span>
-          </div>
+        <div class="section-block">
+            <div class="section-header">Popular</div>
+            <div class="places-grid">
+                <div class="place-card"></div>
+                <div class="place-card"></div>
+                <div class="place-card"></div>
+                <div class="place-card"></div>
+            </div>
         </div>
-        <div class="place-card">
-          <img src="santorini.jpg" alt="Santorini">
-          <h3>Santorini <span class="place-country">Greece</span></h3>
-          <div class="place-meta">
-            <span class="place-rating">4.9</span>
-          </div>
+        <div class="grid-2x2">
+            <div class="grid-cell">
+                <div class="section-header">Weather</div>
+                <div>Loading...</div>
+            </div>
+            <div class="grid-cell">
+                <div class="section-header">Money Conversion</div>
+                <div>Loading...</div>
+            </div>
+            <div class="grid-cell">
+                <div class="section-header">Language Translator</div>
+                <input type="text" placeholder="Type text...">
+                <select>
+                    <option>Spanish</option>
+                    <option>French</option>
+                </select>
+                <button>Translate</button>
+            </div>
+            <div class="grid-cell">
+                <div class="section-header">Calendar</div>
+                <!-- Calendar content here -->
+            </div>
         </div>
-        <div class="place-card">
-          <img src="capadocia.jpg" alt="Capadocia">
-          <h3>Capadocia <span class="place-country">Turkey</span></h3>
-          <div class="place-meta">
-            <span class="place-rating">4.7</span>
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="section-block grid-2x2">
-      <div class="grid-cell" id="weather-cell">
-        <h3>Weather</h3>
-        <div id="weather-info">Loading...</div>
-      </div>
-      <div class="grid-cell" id="money-cell">
-        <h3>Money Conversion</h3>
-        <div id="money-info">Loading...</div>
-      </div>
-      <div class="grid-cell" id="translator-cell">
-        <h3>Language Translator</h3>
-        <input type="text" id="translator-input" placeholder="Type text..." />
-        <select id="translator-lang">
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <!-- Add more languages as needed -->
-        </select>
-        <button id="translator-btn">Translate</button>
-        <div id="translator-result"></div>
-      </div>
-      <div class="grid-cell" id="docs-cell">
-        <h3>Travel Documents</h3>
-        <input type="file" id="doc-upload" multiple />
-        <ul id="doc-list"></ul>
-      </div>
-    </div>
-  </div>
-  <!-- Checklist Modal -->
-  <div id="checklist-modal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="close-checklist">&times;</span>
-      <h2>Travel Checklist</h2>
-      <form id="checklist-form" autocomplete="off" onsubmit="return false;">
-        <ul id="checklist-items"></ul>
-        <div class="checklist-input-row">
-          <input type="text" id="new-checklist-item" placeholder="Add new item..." />
-          <button type="button" id="add-checklist-item">Add</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <script src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>
