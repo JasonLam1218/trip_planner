@@ -29,17 +29,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Editable Checklist Feature ---
     const DEFAULT_CHECKLIST = [
         "Passport", "Medications", "Travel Insurance", "Tickets/Itinerary",
-        "Electronics", "Chargers", "Clothes", "Money/Cards"
+        "Electronics", "Chargers", "Clothes", "Money/Cards",
+        "Sunscreen", "Camera", "Adapter"
     ];
     function getChecklist() {
         const stored = localStorage.getItem('checklistItems');
         if (stored) {
             try {
                 const parsed = JSON.parse(stored);
-                if (Array.isArray(parsed)) return parsed;
-            } catch (e) {}
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    return parsed;
+                }
+            } catch (e) {
+                // If parsing fails or it's not an array, fall back to default
+            }
         }
-        return [...DEFAULT_CHECKLIST];
+        return [...DEFAULT_CHECKLIST]; // Return default if no stored list or stored list is empty/invalid
     }
     function saveChecklist(list) {
         localStorage.setItem('checklistItems', JSON.stringify(list));
