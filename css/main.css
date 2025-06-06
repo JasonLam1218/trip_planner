@@ -104,7 +104,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
-    margin-left: 1.2rem;
+    margin-left: 2rem;
 }
 .logout-btn:hover {
     background: #f7b801;
@@ -136,8 +136,7 @@ body {
     background: #fff;
     font-size: 1.05rem;
     box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    margin-right: 1.5rem;
-    width: 115%;
+    width: 100%;
 }
 .search-bar::placeholder {
     color: #aaa;
@@ -146,7 +145,6 @@ body {
     display: flex;
     align-items: center;
     min-width: 180px;
-    margin-left: 2rem;
 }
 .main-user-name {
     font-size: 1.1rem;
