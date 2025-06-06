@@ -297,3 +297,245 @@ body {
 #weather-widget, #money-widget, #translator-widget, #calendar-widget {
     margin-top: 1rem;
 }
+
+/* Language Translator Fancy Styles */
+.grid-cell:has(#translator-input) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; /* Space between input, select, button, and translated text */
+    background: linear-gradient(145deg, #ffffff, #f0f0f0); /* Subtle gradient background */
+    border: 1px solid #e0e0e0; /* Softer border */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* More prominent shadow */
+    padding: 2rem;
+    border-radius: 18px;
+    transition: all 0.3s ease; /* Smooth transition for interaction */
+}
+
+#translator-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem 1rem;
+    border: 1px solid #a0a0a0; /* Slightly darker border */
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    margin: 0; /* Reset default margins */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+#translator-input:focus {
+    border-color: #f7b801; /* Highlight on focus */
+    box-shadow: 0 0 0 3px rgba(247, 184, 1, 0.2), inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Soft glow on focus */
+    outline: none;
+}
+
+#translator-language-select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem 1rem;
+    border: 1px solid #a0a0a0; /* Slightly darker border */
+    border-radius: 8px;
+    font-size: 1rem;
+    appearance: none; /* Remove default dropdown arrow */
+    -webkit-appearance: none; /* For Webkit browsers */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23444444%22%20d%3D%22M287%2C197.8L159.2%2C69.8c-2.2-2.2-5-3.3-7.2-3.3s-5%2C1.1-7.2%2C3.3L5.4%2C197.8c-4.4%2C4.4-4.4%2C11.4%2C0%2C15.8c4.4%2C4.4%2C11.4%2C4.4%2C15.8%2C0l130.8-130.8c2.2-2.2%2C5-3.3%2C7.2-3.3s5%2C1.1%2C7.2%2C3.3l130.8%2C130.8c4.4%2C4.4%2C11.4%2C4.4%2C15.8%2C0C291.4%2C209.2%2C291.4%2C202.2%2C287%2C197.8z%22%2F%3E%3C%2Fsvg%3E'); /* Darker custom SVG arrow */
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    padding-right: 2.5rem; /* Make space for the custom arrow */
+    background-color: #ffffff;
+    margin: 0; /* Reset default margins */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+#translator-language-select:focus {
+    border-color: #f7b801; /* Highlight on focus */
+    box-shadow: 0 0 0 3px rgba(247, 184, 1, 0.2), inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Soft glow on focus */
+    outline: none;
+}
+
+#translate-btn {
+    width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient(90deg, #f7b801, #ffd700); /* Gradient background */
+    color: #263159;
+    border: 1px solid #e0a500; /* Subtle border */
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 700; /* Bolder font */
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Button shadow */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    margin: 0; /* Reset default margins */
+    text-transform: uppercase; /* Make text uppercase for a modern feel */
+    letter-spacing: 0.05em; /* Add some letter spacing */
+}
+
+#translate-btn:hover {
+    background: linear-gradient(90deg, #ffd700, #f7b801); /* Reverse gradient on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+#translate-btn:active {
+    transform: translateY(0); /* Press down effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Softer shadow on active */
+}
+
+.translated-text-display {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem 1.2rem; /* More padding */
+    background-color: #f0f8ff; /* Very light blue background */
+    border-radius: 10px; /* Nicely rounded corners */
+    min-height: 60px; /* Ensure sufficient height */
+    display: flex;
+    align-items: center;
+    color: #334a6d; /* Darker blue-grey text */
+    font-size: 1.05rem; /* Slightly larger font */
+    font-style: normal; /* Remove italic unless specific effect desired */
+    word-wrap: break-word;
+    white-space: normal;
+    margin: 0; /* Reset default margins */
+    border: 1px solid #cce0f5; /* Light blue border */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.date-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem 1rem;
+    border: 1px solid #a0a0a0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.date-input:focus {
+    border-color: #f7b801;
+    box-shadow: 0 0 0 3px rgba(247, 184, 1, 0.2), inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+/* Calendar Widget Styles */
+#calendar-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+}
+
+.current-month-year {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #263159;
+}
+
+.calendar-nav .nav-button {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.3rem 0.6rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0 0.2rem;
+    color: #263159;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.calendar-nav .nav-button:hover {
+    background-color: #f0f0f0;
+    border-color: #a0a0a0;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.calendar-weekdays span {
+    padding: 0.5rem 0;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    gap: 0.2rem;
+}
+
+.calendar-day {
+    padding: 0.6rem 0.2rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 0.95rem;
+    color: #263159;
+}
+
+.calendar-day:hover {
+    background-color: #e0e0e0;
+}
+
+.calendar-day.inactive {
+    color: #ccc;
+    cursor: default;
+}
+
+.calendar-day.inactive:hover {
+    background-color: transparent;
+}
+
+.calendar-day.selected {
+    background-color: #f7b801;
+    color: #263159;
+    font-weight: 600;
+}
+
+.calendar-day.range-selected {
+    background-color: #ffe8a0;
+    color: #263159;
+}
+
+.calendar-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+}
+
+.calendar-footer .footer-button {
+    background: none;
+    border: none;
+    color: #f7b801;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.calendar-footer .footer-button:hover {
+    color: #ffd700;
+}

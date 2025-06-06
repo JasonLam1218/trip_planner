@@ -54,16 +54,34 @@
             </div>
             <div class="grid-cell">
                 <div class="section-header">Language Translator</div>
-                <input type="text" placeholder="Type text...">
-                <select>
-                    <option>Spanish</option>
-                    <option>French</option>
+                <input type="text" id="translator-input" placeholder="Type text...">
+                <select id="translator-language-select">
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
                 </select>
-                <button>Translate</button>
+                <button id="translate-btn">Translate</button>
+                <div id="translated-text" class="translated-text-display"></div>
             </div>
             <div class="grid-cell">
                 <div class="section-header">Calendar</div>
-                <!-- Calendar content here -->
+                <div id="calendar-widget">
+                    <div class="calendar-header">
+                        <span id="current-month-year" class="current-month-year"></span>
+                        <div class="calendar-nav">
+                            <button id="prev-month" class="nav-button">&#9650;</button>
+                            <button id="next-month" class="nav-button">&#9660;</button>
+                        </div>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+                    </div>
+                    <div id="calendar-grid" class="calendar-grid"></div>
+                    <div class="calendar-footer">
+                        <button id="clear-dates" class="footer-button">清除</button>
+                        <button id="today-date" class="footer-button">今天</button>
+                    </div>
+                    <div id="total-days-display" style="margin-top: 1.5rem; font-size: 1.1rem; font-weight: 600;"></div>
+                </div>
             </div>
         </div>
     </div>

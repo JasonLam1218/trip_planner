@@ -490,4 +490,178 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // Call money conversion on initial load (default HKD to HKD)
     fetchMoneyConversion('HKD', 'HKD');
+
+    // --- Language Translator Feature (Local Implementation) ---
+    const translatorInput = document.getElementById('translator-input');
+    const translatorLanguageSelect = document.getElementById('translator-language-select');
+    const translateBtn = document.getElementById('translate-btn');
+    const translatedTextOutput = document.getElementById('translated-text');
+
+    // Simple local translation dictionary
+    const translationDictionary = {
+        'hello': { 'es': 'hola', 'fr': 'bonjour' },
+        'goodbye': { 'es': 'adiós', 'fr': 'au revoir' },
+        'thank you': { 'es': 'gracias', 'fr': 'merci' },
+        'how are you': { 'es': '¿cómo estás?', 'fr': 'comment allez-vous?' },
+        'travel': { 'es': 'viajar', 'fr': 'voyager' },
+        'spot': { 'es': 'sitio', 'fr': 'endroit' },
+        'welcome': { 'es': 'bienvenido', 'fr': 'bienvenue' },
+        'yes': { 'es': 'sí', 'fr': 'oui' },
+        'no': { 'es': 'no', 'fr': 'non' },
+        'please': { 'es': 'por favor', 'fr': 's\'il vous plaît' },
+        'water': { 'es': 'agua', 'fr': 'eau' },
+        'food': { 'es': 'comida', 'fr': 'nourriture' }
+    };
+
+    if (translateBtn && translatorInput && translatorLanguageSelect && translatedTextOutput) {
+        translateBtn.addEventListener('click', () => {
+            const textToTranslate = translatorInput.value.trim().toLowerCase();
+            const targetLanguage = translatorLanguageSelect.value;
+
+            if (textToTranslate) {
+                const translatedResult = localTranslate(textToTranslate, targetLanguage);
+                translatedTextOutput.textContent = translatedResult;
+            } else {
+                translatedTextOutput.textContent = 'Please enter text to translate.';
+            }
+        });
+    }
+
+    function localTranslate(text, targetLang) {
+        // Try to find a direct match in the dictionary
+        if (translationDictionary[text] && translationDictionary[text][targetLang]) {
+            return translationDictionary[text][targetLang];
+        } else {
+            // Fallback for unknown words/phrases
+            return `(No local translation for '${text}' to ${targetLang} found)`;
+        }
+    }
+
+    // --- Calendar Widget ---
+    const calendarWidget = document.getElementById('calendar-widget');
+    const currentMonthYearDisplay = document.getElementById('current-month-year');
+    const prevMonthBtn = document.getElementById('prev-month');
+    const nextMonthBtn = document.getElementById('next-month');
+    const calendarGrid = document.getElementById('calendar-grid');
+    const totalDaysDisplay = document.getElementById('total-days-display');
+    const clearDatesBtn = document.getElementById('clear-dates');
+    const todayDateBtn = document.getElementById('today-date');
+
+    let currentDisplayedDate = new Date(); // Stores the month/year currently displayed
+    let startDate = null;
+    let endDate = null;
+
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+    const weekdayNames = ["日", "一", "二", "三", "四", "五", "六"];
+
+    function renderCalendar() {
+        calendarGrid.innerHTML = '';
+        const year = currentDisplayedDate.getFullYear();
+        const month = currentDisplayedDate.getMonth();
+
+        currentMonthYearDisplay.textContent = `${year}年${(month + 1).toString().padStart(2, '0')}月`;
+
+        const firstDayOfMonth = new Date(year, month, 1);
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDayOfWeek = firstDayOfMonth.getDay(); // 0 for Sunday, 1 for Monday, etc.
+
+        // Calculate days from previous month to display
+        const daysFromPrevMonth = firstDayOfWeek;
+        const prevMonthLastDay = new Date(year, month, 0).getDate();
+
+        // Render days from previous month
+        for (let i = 0; i < daysFromPrevMonth; i++) {
+            const day = document.createElement('div');
+            day.classList.add('calendar-day', 'inactive');
+            day.textContent = prevMonthLastDay - daysFromPrevMonth + 1 + i;
+            calendarGrid.appendChild(day);
+        }
+
+        // Render days of the current month
+        for (let i = 1; i <= daysInMonth; i++) {
+            const day = document.createElement('div');
+            day.classList.add('calendar-day');
+            day.textContent = i;
+            const date = new Date(year, month, i);
+
+            if (startDate && date.toDateString() === startDate.toDateString()) {
+                day.classList.add('selected');
+            }
+            if (endDate && date.toDateString() === endDate.toDateString()) {
+                day.classList.add('selected');
+            }
+            if (startDate && endDate && date > startDate && date < endDate) {
+                day.classList.add('range-selected');
+            }
+
+            day.addEventListener('click', () => handleDayClick(date));
+            calendarGrid.appendChild(day);
+        }
+
+        // Render days from next month to fill the grid (up to 42 cells total for 6 rows * 7 days)
+        const totalCells = daysFromPrevMonth + daysInMonth;
+        const remainingCells = 42 - totalCells;
+        for (let i = 1; i <= remainingCells; i++) {
+            const day = document.createElement('div');
+            day.classList.add('calendar-day', 'inactive');
+            day.textContent = i;
+            calendarGrid.appendChild(day);
+        }
+        calculateTotalDays();
+    }
+
+    function handleDayClick(date) {
+        if (!startDate || (startDate && endDate)) {
+            startDate = date;
+            endDate = null; // Reset endDate if a new selection starts
+        } else if (date < startDate) {
+            endDate = startDate;
+            startDate = date;
+        } else {
+            endDate = date;
+        }
+        renderCalendar(); // Re-render to update selection visual
+    }
+
+    function calculateTotalDays() {
+        if (startDate && endDate) {
+            const timeDiff = endDate.getTime() - startDate.getTime();
+            const daysDiff = Math.round(timeDiff / (1000 * 3600 * 24)) + 1;
+            totalDaysDisplay.textContent = `Total Days: ${daysDiff} days`;
+        } else if (startDate) {
+            totalDaysDisplay.textContent = `Selected: ${startDate.toLocaleDateString()}`; // Show only start date if end is not selected
+        } else {
+            totalDaysDisplay.textContent = '';
+        }
+    }
+
+    // Event listeners for navigation
+    prevMonthBtn.addEventListener('click', () => {
+        currentDisplayedDate.setMonth(currentDisplayedDate.getMonth() - 1);
+        renderCalendar();
+    });
+
+    nextMonthBtn.addEventListener('click', () => {
+        currentDisplayedDate.setMonth(currentDisplayedDate.getMonth() + 1);
+        renderCalendar();
+    });
+
+    // Event listeners for footer buttons
+    clearDatesBtn.addEventListener('click', () => {
+        startDate = null;
+        endDate = null;
+        renderCalendar();
+    });
+
+    todayDateBtn.addEventListener('click', () => {
+        const today = new Date();
+        currentDisplayedDate = new Date(today.getFullYear(), today.getMonth(), 1); // Set to start of today's month
+        startDate = today;
+        endDate = today;
+        renderCalendar();
+    });
+
+    // Initial render of the calendar when the page loads
+    renderCalendar();
 });
