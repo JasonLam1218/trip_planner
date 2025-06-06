@@ -20,7 +20,7 @@ let debounceTimer = null;
 const placesList = document.getElementById('places-list');
 const searchInput = document.getElementById('place-search');
 const searchSection = searchInput.parentNode;
-let autocompleteResults = document.querySelector('.autocomplete-results');
+const autocompleteResults = document.getElementById('autocomplete-results');
 if (!autocompleteResults) {
   autocompleteResults = document.createElement('div');
   autocompleteResults.className = 'autocomplete-results';
@@ -64,10 +64,28 @@ function renderAutocomplete(suggestions) {
     autocompleteResults.style.display = 'none';
     return;
   }
+  // Style the container for better appearance
+  autocompleteResults.style.display = 'block';
+  autocompleteResults.style.background = '#fff';
+  autocompleteResults.style.border = '1px solid #ccc';
+  autocompleteResults.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+  autocompleteResults.style.position = 'absolute';
+  autocompleteResults.style.zIndex = '1000';
+  autocompleteResults.style.width = searchInput.offsetWidth + 'px';
+
   suggestions.forEach((feature) => {
     const item = document.createElement('div');
     item.className = 'autocomplete-item';
     item.textContent = feature.properties.formatted;
+    item.style.padding = '10px 16px';
+    item.style.cursor = 'pointer';
+    item.style.borderBottom = '1px solid #eee';
+    item.addEventListener('mouseover', () => {
+      item.style.background = '#f5f5f5';
+    });
+    item.addEventListener('mouseout', () => {
+      item.style.background = '#fff';
+    });
     item.addEventListener('click', () => {
       searchInput.value = feature.properties.formatted;
       autocompleteResults.innerHTML = '';
@@ -76,7 +94,10 @@ function renderAutocomplete(suggestions) {
     });
     autocompleteResults.appendChild(item);
   });
-  autocompleteResults.style.display = 'block';
+  // Remove last border
+  if (autocompleteResults.lastChild) {
+    autocompleteResults.lastChild.style.borderBottom = 'none';
+  }
 }
 
 // Hide autocomplete when clicking outside

@@ -14,7 +14,10 @@
         <h2>Create Itinerary</h2>
       </header>
       <div class="search-section">
-        <input type="text" id="place-search" placeholder="Search famous places...">
+        <div id="location-search-container">
+          <input type="text" id="place-search" placeholder="Search famous places...">
+          <div id="autocomplete-results" class="autocomplete-results"></div>
+        </div>
         <!-- Autocomplete results will be injected here by JS -->
       </div>
       <ul id="places-list" class="places-list">
@@ -25,7 +28,6 @@
       <header class="main-header-actions">
         <h2>Your Timetable Planner</h2>
         <div class="timetable-actions">
-          <button id="save-btn">Save</button>
           <button id="save-image-btn">Save Image</button>
         </div>
       </header>
