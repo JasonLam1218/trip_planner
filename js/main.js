@@ -144,10 +144,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 autocompleteResults.style.display = 'none';
                 return;
             }
+            // Style the container for better appearance
+            autocompleteResults.style.display = 'block';
+            autocompleteResults.style.background = '#fff';
+            autocompleteResults.style.border = '1px solid #ccc';
+            autocompleteResults.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+            autocompleteResults.style.position = 'absolute';
+            autocompleteResults.style.zIndex = '1000';
+            autocompleteResults.style.width = searchInput.offsetWidth + 'px';
             suggestions.forEach((feature) => {
                 const item = document.createElement('div');
                 item.className = 'autocomplete-item';
                 item.textContent = feature.properties.formatted;
+                item.style.padding = '10px 16px';
+                item.style.cursor = 'pointer';
+                item.style.borderBottom = '1px solid #eee';
+                item.addEventListener('mouseover', () => {
+                    item.style.background = '#f5f5f5';
+                });
+                item.addEventListener('mouseout', () => {
+                    item.style.background = '#fff';
+                });
                 item.addEventListener('click', () => {
                     searchInput.value = feature.properties.formatted;
                     autocompleteResults.innerHTML = '';
@@ -156,7 +173,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 autocompleteResults.appendChild(item);
             });
-            autocompleteResults.style.display = 'block';
+            // Remove last border
+            if (autocompleteResults.lastChild) {
+                autocompleteResults.lastChild.style.borderBottom = 'none';
+            }
         }
         document.addEventListener('click', function(e) {
             if (!autocompleteResults.contains(e.target) && e.target !== searchInput) {
@@ -211,6 +231,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.appendChild(title);
             }
         }));
+        // Fetch weather for the selected location
+        fetchWeather(lat, lon);
     }
     async function fetchPexelsImage(query) {
         const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1`;
@@ -282,4 +304,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }));
     }
     showRandomPlaceCards();
+
+    // --- Weather Widget: Next 3 Days Forecast ---
+    const weatherWidget = document.getElementById('weather-widget');
+    const weatherApiKey = '3e9b51742505c6f63606c48611fcfbdb'; // <-- Replace with your OpenWeatherMap API key
+    const defaultLat = 22.302711; // Hong Kong latitude
+    const defaultLon = 114.177216; // Hong Kong longitude
+
+    async function fetchWeather(lat, lon) {
+        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=metric`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Weather API error:', response.status, errorText);
+                throw new Error('Weather API error');
+            }
+            const data = await response.json();
+            // Group by date
+            const days = {};
+            data.list.forEach(item => {
+                const date = item.dt_txt.split(' ')[0];
+                if (!days[date]) days[date] = [];
+                days[date].push(item);
+            });
+            // Get next 3 *future* days (skip today if partial)
+            const today = new Date().toISOString().split('T')[0];
+            const allDates = Object.keys(days).filter(d => d > today);
+            const next3 = allDates.slice(0, 3).map(date => {
+                const temps = days[date].map(i => i.main.temp);
+                const avgTemp = (temps.reduce((a, b) => a + b, 0) / temps.length).toFixed(1);
+                // Find the most frequent weather description for the day
+                const weatherCounts = {};
+                days[date].forEach(i => {
+                    const desc = i.weather[0].description;
+                    weatherCounts[desc] = (weatherCounts[desc] || 0) + 1;
+                });
+                const weather = Object.entries(weatherCounts).sort((a, b) => b[1] - a[1])[0][0];
+                return { date, avgTemp, weather };
+            });
+            renderWeather(next3);
+        } catch (e) {
+            console.error('Failed to load weather:', e);
+            weatherWidget.textContent = 'Failed to load weather.';
+        }
+    }
+
+    function renderWeather(days) {
+        if (!days.length) {
+            weatherWidget.innerHTML = 'No forecast available.';
+            return;
+        }
+        weatherWidget.innerHTML = days.map(day =>
+            `<div><strong>${day.date}</strong>: ${day.weather}, ${day.avgTemp}°C</div>`
+        ).join('');
+    }
 });
