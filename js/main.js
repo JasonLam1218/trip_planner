@@ -233,6 +233,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }));
         // Fetch weather for the selected location
         fetchWeather(lat, lon);
+        // Money conversion: get country/currency from feature
+        const country = getCountryFromFeature(feature);
+        const toCurrency = getCurrencyCode(country);
+        fetchMoneyConversion('HKD', toCurrency);
     }
     async function fetchPexelsImage(query) {
         const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1`;
@@ -359,4 +363,126 @@ document.addEventListener('DOMContentLoaded', function() {
             `<div><strong>${day.date}</strong>: ${day.weather}, ${day.avgTemp}°C</div>`
         ).join('');
     }
+
+    // --- Money Conversion Widget: Today's Rate ---
+    const moneyWidget = document.getElementById('money-widget');
+    // Helper: Map country to currency code (expand as needed)
+    const countryToCurrency = {
+        'Hong Kong': 'HKD',
+        'China': 'CNY',
+        'Japan': 'JPY',
+        'France': 'EUR',
+        'Turkey': 'TRY',
+        'Greece': 'EUR',
+        'United States': 'USD',
+        'Italy': 'EUR',
+        'Spain': 'EUR',
+        'Canada': 'CAD',
+        'New Zealand': 'NZD',
+        'Maldives': 'MVR',
+        'Indonesia': 'IDR',
+        'Afghanistan': 'AFN',
+        'Albania': 'ALL',
+        'Algeria': 'DZD',
+        'Thailand': 'THB',
+        'Taiwan': 'TWD',
+        'Vietnam': 'VND',
+        'Philippines': 'PHP',
+        'Malaysia': 'MYR',
+        'Singapore': 'SGD',
+        'Indonesia': 'IDR',
+        'India': 'INR',
+        'Angola': 'AOA',
+        'Argentina': 'ARS',
+        'Australia': 'AUD',
+        'Aruba': 'AWG',
+        'Azerbaijan': 'AZN',
+        'Bahamas': 'BSD',
+        'Bahrain': 'BHD',
+        'Bangladesh': 'BDT',
+        'Barbados': 'BBD',
+        'Belarus': 'BYN',
+        'Belize': 'BZD',
+        'Benin': 'XOF',
+        'Bermuda': 'BMD',
+        'Bhutan': 'BTN',
+        'Bolivia (Plurinational State of)': 'BOB',
+        'Bosnia and Herzegovina': 'BAM',
+        'Botswana': 'BWP',
+        'Brazil': 'BRL',
+        'Brunei Darussalam': 'BND',
+        'Bulgaria': 'BGN',
+        'Burundi': 'BIF',
+        'Cabo Verde': 'CVE',
+        'Cambodia': 'KHR',
+        'Cameroon': 'XAF',
+        'Cayman Islands': 'KYD',
+        'Chile': 'CLP',
+        'Colombia': 'COP',
+        'Comoros': 'KMF',
+        'Congo (The Democratic Republic of the)': 'CDF',
+        'Costa Rica': 'CRC',
+        'Cuba': 'CUP',
+        'Curaçao': 'ANG',
+        'Czech Republic (The)': 'CZK',
+        'Denmark': 'DKK',
+        'Djibouti': 'DJF',
+        'Dominica': 'XCD',
+        'Dominican Republic (The)': 'DOP',
+        'Egypt': 'EGP',
+        'El Salvador': 'SVC',
+        'Eritrea': 'ERN',
+        'Ethiopia': 'ETB',
+        'Fiji': 'FJD',
+        'Gabon': 'XAF',
+        'Gambia (The)': 'GMD',
+        'Georgia': 'GEL',
+        'Ghana': 'GHS',
+        'Gibraltar': 'GIP',
+        // End of additional countries
+    };
+    // Helper: Extract country from Geoapify feature
+    function getCountryFromFeature(feature) {
+        // Try to get the most specific country name
+        return feature.properties.country || feature.properties.country_code || '';
+    }
+    // Helper: Get currency code from country name
+    function getCurrencyCode(country) {
+        // Try direct match, fallback to HKD
+        return countryToCurrency[country] || 'HKD';
+    }
+    async function fetchMoneyConversion(fromCurrency, toCurrency) {
+        if (!moneyWidget) return;
+        const url = `https://api.currencylayer.com/live?access_key=8a54059f70c4cc6a4fc53344c3e49b0c&currencies=${toCurrency},HKD`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Money API error:', response.status, errorText);
+                moneyWidget.innerHTML = `Error: ${response.status} - ${errorText}`;
+                throw new Error('Money API error');
+            }
+            const data = await response.json();
+
+            if (data && data.success && data.quotes) {
+                const usdToTargetRate = data.quotes[`USD${toCurrency}`];
+                const usdToHkdRate = data.quotes['USDHKD'];
+
+                if (usdToTargetRate && usdToHkdRate) {
+                    const hkdToUsdRate = 1 / usdToHkdRate;
+                    const hkdToTargetRate = hkdToUsdRate * usdToTargetRate;
+                    moneyWidget.innerHTML = `1 ${fromCurrency} = ${hkdToTargetRate.toFixed(2)} ${toCurrency} (today)`;
+                } else {
+                    moneyWidget.innerHTML = `Rates not available for ${fromCurrency} or ${toCurrency}.`;
+                }
+            } else {
+                moneyWidget.innerHTML = `No conversion rate available. API Response: ${data.error ? data.error.info : JSON.stringify(data)}.`;
+            }
+        } catch (e) {
+            console.error('Failed to load money conversion:', e);
+            moneyWidget.innerHTML = 'Failed to load conversion.';
+        }
+    }
+    // Call money conversion on initial load (default HKD to HKD)
+    fetchMoneyConversion('HKD', 'HKD');
 });
